@@ -21,11 +21,12 @@ class _CamScreenState extends State<CamScreen> {
     final cameraPermission = resp[Permission.camera];
     final micPermission = resp[Permission.microphone];
 
-    if (cameraPermission != PermissionStatus.granted ||
-        micPermission != PermissionStatus.granted) {
-      throw "카메라 또는 마이크 권한이 없습니다.";
+    if (cameraPermission != PermissionStatus.granted) {
+      throw "카메라 권한이 없습니다.";
     }
-
+    if (micPermission != PermissionStatus.granted) {
+      throw "마이크 권한이 없습니다.";
+    }
     if (engine == null) {
       engine = createAgoraRtcEngine();
 
@@ -103,16 +104,35 @@ class _CamScreenState extends State<CamScreen> {
             );
           }
 
-          return Stack(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              renderMainView(),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  color: Colors.grey,
-                  height: 160,
-                  width: 120,
-                  child: renderSubView(),
+              Expanded(
+                child: Stack(
+                  children: [
+                    renderMainView(),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        color: Colors.grey,
+                        height: 160,
+                        width: 120,
+                        child: renderSubView(),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (engine != null) {
+                      await engine!.leaveChannel();
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("채널 나가기"),
                 ),
               )
             ],
