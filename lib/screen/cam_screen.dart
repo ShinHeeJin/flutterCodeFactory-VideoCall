@@ -103,8 +103,19 @@ class _CamScreenState extends State<CamScreen> {
             );
           }
 
-          return const Center(
-            child: Text("모든 권한이 있습니다!"),
+          return Stack(
+            children: [
+              renderMainView(),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  color: Colors.grey,
+                  height: 160,
+                  width: 120,
+                  child: renderSubView(),
+                ),
+              )
+            ],
           );
         },
       ),
