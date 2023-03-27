@@ -110,4 +110,39 @@ class _CamScreenState extends State<CamScreen> {
       ),
     );
   }
+
+  // 나의 핸드폰이 찍는 화면 렌더링
+  Widget renderSubView() {
+    if (myUid != null) {
+      return AgoraVideoView(
+        controller: VideoViewController(
+          rtcEngine: engine!,
+          canvas: const VideoCanvas(uid: 0),
+        ),
+      );
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
+  Widget renderMainView() {
+    if (otherUid != null) {
+      return AgoraVideoView(
+        controller: VideoViewController.remote(
+          rtcEngine: engine!,
+          canvas: VideoCanvas(uid: otherUid),
+          connection: const RtcConnection(
+            channelId: CHANNEL_NAME,
+          ),
+        ),
+      );
+    } else {
+      return const Center(
+        child: Text(
+          "다른 사용자가 입장할 때 까지 대기해주세요.",
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+  }
 }
