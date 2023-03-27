@@ -25,12 +25,33 @@ class _CamScreenState extends State<CamScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 위젯 생성시 즉시 실행되는 build 함수
     return Scaffold(
       appBar: AppBar(
         title: const Text("LIVE"),
       ),
-      body: const Center(
-        child: Text("Cam Screen"),
+      body: FutureBuilder(
+        // FutureBuilder : Future를 반환하는 함수의 결과에 따라 위젯을 렌더링 할 때 사용.
+        future: init(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+              ),
+            );
+          }
+
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return const Center(
+            child: Text("모든 권한이 있습니다!"),
+          );
+        },
       ),
     );
   }
