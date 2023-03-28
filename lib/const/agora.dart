@@ -1,4 +1,4 @@
 const APP_ID = "ffb2cea783da428faee08fe61c77787b";
-const CHANNEL_NAME = "testchannel-heej";
+const CHANNEL_NAME = "testchannel-heej2";
 const TEMP_TOKEN =
-    "007eJxTYHhyXqhU9HHnia7MV4ejE+2/vFE+Uvrb+3v831mHih0Kn+cpMKSlJRklpyaaWxinJJoYWaQlpqYaWKSlmhkmm5ubW5gnrd6pmNIQyMhwxy+YkZEBAkF8AYaS1OKS5IzEvLzUHN2M1NQsBgYAT/0oHA==";
+    "007eJxTYAhndJm/p7HoypYfrNJ5yuEh9SdC/p193dl2e//RcMcEWV4FhrS0JKPk1ERzC+OURBMji7TE1FQDi7RUM8Nkc3NzC/MkY27llIZARobt/H8ZGKEQxBdkKEktLknOSMzLS83RzUhNzTJiYAAAJKgkTw==";
